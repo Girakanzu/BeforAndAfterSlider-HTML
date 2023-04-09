@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Slider Example</title>
+    <style>
+      #image-container {
+        width: 500px;
+        height: 800px;
+        position: relative;
+        overflow: hidden;
+      }
+      
+      #before-image, #after-image {
+ 		 position: absolute;
+ 		 top: 0;
+ 		 bottom: 0;
+		  left: 0;
+		  width: 100%;
+ 		 height: 100%;
+		  object-fit: cover;
+ 		 transition: clip-path 0.5s ease-in-out;
+	  }
+      
+      #before-image {
+        clip-path: polygon(0 0, 0 100%, 50% 100%, 50% 0);
+      }
+      
+      #after-image {
+        clip-path: polygon(50% 0, 50% 100%, 100% 100%, 100% 0);
+      }
+      
+      #slider-container {
+        width: 100%;
+        margin-top: 20px;
+      }
+      
+      #slider {
+        width: 100%;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="image-container">
+      <img id="before-image" src="YOUR FIRST IMAGE LINK/PATH HERE">
+      <img id="after-image" src="YOUR SECOND IMAGE LINK/PATH HERE">
+    </div>
+    <div id="slider-container">
+      <input type="range" min="0" max="100" value="50" class="slider" id="slider">
+    </div>
+    <script>
+      const beforeImage = document.getElementById("before-image");
+      const afterImage = document.getElementById("after-image");
+      const slider = document.getElementById("slider");
+      
+      slider.addEventListener("input", () => {
+        const value = slider.value;
+        beforeImage.style.clipPath = `polygon(0 0, 0 100%, ${value}% 100%, ${value}% 0)`;
+        afterImage.style.clipPath = `polygon(${value}% 0, ${value}% 100%, 100% 100%, 100% 0)`;
+      });
+    </script>
+  </body>
+</html>
